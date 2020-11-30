@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+
+<!-- POSTS -->
+<div class="container row mx-auto">
+  <div class="container my-3">
+    <h3>Most Popular Photo</h3>
+    <div class="hashtags">
+      <% rows.forEach((row) => { %>
+      <button class="btn btn-info text-white"><%= row.username %> : <%= row.image_url %></</button>
+      <% }); %>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

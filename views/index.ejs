@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+<!-- POSTS -->
+<div class="container row mx-auto">
+  <h1>DBMS Mini Project</h1>
+  <p>
+    This project runs a sql query on every new page from the social media
+    database of many tables.
+  </p>
+  <p>It uses Node.js, Express.js, MySql and EJS.</p>
+  <p>A part of database is show below:</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Username</th>
+        <th scope="col">Joined On</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% rows.forEach((row) => { %>
+      <tr>
+        <td><%= row.id %></td>
+        <td><%= row.username %></td>
+        <td><%= row.created_at %></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>
+
+<!-- select * from comments, follows, likes, photo_tags, photos, tags, users; -->

@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+
+<!-- POSTS -->
+<div class="container row mx-auto">
+  <div class="container my-3">
+    <h3>Most Popular Day on Platform</h3>
+    <div class="hashtags">
+      <% rows.forEach((row) => { %>
+      <button class="btn btn-info text-white"><%= row.day %></button>
+      <% }); %>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
