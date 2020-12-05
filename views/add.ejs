@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<!-- POSTS -->
+<div class="container mx-auto my-3" style="max-width: 300px; margin: 0 auto">
+  <form action="/submitform" method="POST">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" />
+    </div>
+    <div class="mb-4">
+      <label for="age" class="form-label">Age</label>
+      <input type="text" class="form-control" id="age" name="age" />
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin: 0">
+      Submit
+    </button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,6 +1,15 @@
 const express = require("express"),
   app = express();
+
 var path = require("path");
+
+var bodyParser = require("body-parser");
+
+// create application/json parser
+var jsonParser = bodyParser.json();
+
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 //EJS
 app.set("view engine", "ejs");
@@ -31,6 +40,31 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/add", (req, res) => {
+  res.render("add", {
+    page: "add"
+  });
+});
+
+app.post("/submitform", urlencodedParser, function (req, res, next) {
+  console.log(req.body);
+  con.query(
+    "INSERT INTO `users`(`username`,`age`, `created_at`) VALUES ('" +
+      req.body.username +
+      "','" +
+      req.body.age +
+      "','" +
+      "2020-02-16 18:22:10.846" +
+      "')",
+    (err, rows) => {
+      if (err) {
+        console.log(err);
+      }
+      res.redirect("/");
+    }
+  );
+});
+
 app.get("/old", (req, res) => {
   con.query("SELECT * FROM users ORDER BY created_at LIMIT 5 ", (err, rows) => {
     if (err) {
@@ -41,7 +75,6 @@ app.get("/old", (req, res) => {
 });
 
 app.get("/popular", (req, res) => {
-  // Find the five most popular hashtags from db
   con.query(
     "SELECT DAYNAME(created_at) AS day,COUNT(*) AS total FROM users GROUP BY day ORDER BY total DESC LIMIT 2",
     (err, rows) => {
@@ -60,7 +93,7 @@ app.get("/inactive", (req, res) => {
       if (err) {
         console.log(err);
       }
-      console.log(rows);
+      // console.log(rows);
       res.render("inactive", { rows: rows, page: "inactive" });
     }
   );
@@ -91,7 +124,6 @@ app.get("/bot", (req, res) => {
 });
 
 app.get("/avg", (req, res) => {
-  // Find the five most popular hashtags from db
   con.query(
     "SELECT (SELECT Count(*) FROM photos) / (SELECT Count(*) FROM users) AS avg",
     (err, rows) => {
